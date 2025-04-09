@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start Camera</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #9a9dc1;
+            margin: 50px;
+        }
+        
+        button {
+            background-color: #28a745;
+            color: white;
+            font-size: 18px;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        
+        button:hover {
+            background-color: #218838;
+        }
+        
+        form {
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Start Camera</h1>
+
+    <form action="{{url_for('open_camera')}}" method="post">
+        <button id="s_camera">📷 Start Camera</button>
+    </form>
+
+</body>
+
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/custom/dashboard.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+    <!-- Wrapper for Sidebar and Content -->
+    <div class="wrapper" id="scroll-box">
+        <!-- Sidebar -->
+        <nav class="sidebar p-3" >
+            <ul class="nav flex-column vh-20">
+                <li class="nav-item">
+                    <a href="{{ url_for('home_dash') }}" class="nav-link text-white"><i class="fa fa-home"></i><span>Home</span></a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" href="#" id="userDropdown" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                      <i class="fa fa-user"></i> <span>User Overview</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="userDropdown" style="position: static; float: none;">
+                      <li><a class="dropdown-item" href="{{ url_for('all_visitor') }}">All Visitor</a></li>
+                      <li><a class="dropdown-item" href="{{ url_for('accepted_visitor') }}">Accepted Visitor</a></li>
+                      <li><a class="dropdown-item" href="{{ url_for('rejected_visitor') }}">Rejected Visitors</a></li>
+                    </ul>
+                  </li>
+                <!-- <li class="nav-item">
+                     <a href="{{ url_for('userOverview_dash') }}" class="nav-link text-white"><i class="fa fa-user"></i> <span>User Overview</span></a>
+                </li> -->
+                <li class="nav-item">
+                    <a href="{{ url_for('camera') }}" class="nav-link text-white"><i class="fa fa-camera"></i> <span>Camera</span></a>
+               </li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="main-content " >
+            <!-- Top Navbar -->
+            <nav class="navbar navbar-expand-lg navbar-dark bg-primary vh-20">
+                <div class="container-fluid">
+                    <a class="navbar-brand ms-3" href="#">Security Dashboard</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item">
+                               <button class="btn btn-warning">Refresh</button>
+                            </li>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <li class="nav-item">
+                                <a href="{{ url_for('logout') }}" class="btn btn-danger">Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            
+            <!-- Page Content -->
+            <div class="container mt-4">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card shadow p-3">
+                            <img src="static/css/imgs/security-checked.png" class="mx-auto d-block">
+                            <h5 class="mt-2 text-center">Security</h5>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card shadow p-3">
+                            <img src="static/css/imgs/visitor.png" class="mx-auto d-block">
+                            <h5 class="mt-2 text-center">Visitors</h5>
+                        </div>
+                    </div>
+                    <div class="col-md-4" >
+                        <div class="card shadow p-3">
+                            <img src="static/css/imgs/info.png" class="mx-auto d-block">
+                            <h5 class="mt-2 text-center">Administrator</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('toggleSidebar')?.addEventListener('click', function () {
+            document.getElementById('sidebar').classList.toggle('collapsed');
+        });
+    </script>
+</body>
+</html>

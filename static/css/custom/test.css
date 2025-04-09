@@ -1,0 +1,11 @@
+@media screen and (min-width:768px) {
+    .card{
+        background-color: red;
+    }
+}
+
+@media screen and (max-width:520px) {
+    .card{
+        background-color: green;
+    }
+}

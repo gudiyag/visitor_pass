@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Navbar & Sidebar</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            scroll-behavior: smooth;        
+        }
+        .wrapper {
+            display: flex;
+            flex-grow: 1;
+            min-height: 100vh;
+            width: 100%;
+           position: fixed;
+        }
+        .sidebar {
+            width: 350px;
+            transition: width 0.3s;
+            background-color: #343a40;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .sidebar.collapsed {
+            width: 80px;
+        }
+        .sidebar .nav-link {
+            display: flex;
+            align-items: center;
+        }
+        .sidebar.collapsed .nav-link span {
+            display: none;
+        }
+        .sidebar .nav-link i {
+            margin-right: 10px;
+        }
+        .sidebar.collapsed .nav-link i {
+            margin-right: 0;
+        }
+        .main-content {
+            flex-grow: 1;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;   
+        }
+       
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 80px;
+            }
+            .sidebar .nav-link span {
+                display: none;
+            }    
+        }
+        #scroll-box {
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            border: 1px solid #ccc;
+        }
+        .container{
+            background: whitesmoke;
+            margin: 0 auto;    
+            padding:10px;        
+            border-radius: 10px;
+            max-width: 70%;
+
+        }
+        .txt{
+            width: 300px;
+            margin-left: 30px;
+        }
+        .txtb{
+          margin-left: 150px;
+          background-color: #343a40;
+          color: white;
+        }
+        
+    </style>
+</head>
+<body>
+    <!-- Wrapper for Sidebar and Content -->
+    <div class="wrapper" id="scroll-box">
+
+        <!-- Main Content -->
+        <div class="main-content " >
+            <!-- Top Navbar -->
+            <nav class="navbar navbar-expand-lg navbar-dark bg-primary vh-20">
+                <div class="container-fluid">
+                    <span class="navbar-brand ms-3">Aadhaar Details</span>
+                </div>
+            </nav>
+            
+            <!-- Page Content -->
+            <form method="POST">
+            <div class="container mt-4">
+                <h2 style="text-align: center;">Set Information</h2>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="floatingInput" placeholder="Name" style="margin: 2px" name="full_name" value="{{ aadhaar.full_name }}">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                   <input type="text" class="form-control" id="floatingPassword" placeholder="Father Name" style="margin: 2px" name="father_name">
+                            
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="floatingPassword" placeholder=" DOB" style="margin: 2px;" name="dob" value="{{ aadhaar.dob }}">
+
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="floatingPassword" placeholder="Gender" style="margin: 2px" name="gender" value="{{ aadhaar.gender }}">                          
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="floatingPassword" placeholder="Card" style="margin: 2px" name="card">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="floatingPassword" placeholder="UID" style="margin: 2px" name="aadhaar_number" value="{{ aadhaar.aadhaar_number }}">
+                            
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="date" class="form-control" id="floatingPassword" placeholder="IssueDate" style="margin: 2px" name="issue_date">
+
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="floatingPassword" placeholder="Purpose" style="margin: 2px" name="purpose">
+                          
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                    <br />
+
+                        <div class="form-group">
+                        <center><button type="submit" class="btn btn-primary">Submit</button></center>
+                    </div>
+                    </div>
+                </div>
+               
+                </div>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

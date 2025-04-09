@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Camera Feed</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+        }
+        
+        h1 {
+            color: #333;
+        }
+        
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .video-container,
+        .image-container {
+            margin: 10px;
+            padding: 10px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        img {
+            border: 5px solid #333;
+            border-radius: 10px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 20px;
+            margin: 10px;
+            font-size: 18px;
+            text-decoration: none;
+            color: white;
+            background-color: #007bff;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        
+        .btn-danger {
+            background-color: #dc3545;
+            text-align: left;
+        }
+        
+        .btn-danger:hover {
+            background-color: #a71d2a;
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Live Camera Feed</h1>
+
+    <div class="container">
+        <div class="video-container">
+            <h2>Live Feed</h2>
+            <img src="/video_feed" width="480" height="400">
+        </div>
+        <div class="image-container">
+            <h2>Captured Image</h2>
+            <!-- <img id="capturedImage" src="static/captured_image.jpg" width="480" height="400" onerror="this.style.display='none'"> -->
+            <img id="capturedImage" src="" width="480" height="400" onerror="this.style.display='none'">
+
+        </div>
+    </div>
+
+    <br>
+    <button onclick="captureImage()" class="btn">📸 Capture</button>
+    <a href="{{url_for('stop_camera')}}" class="btn btn-danger">❌ Close Camera</a>
+
+    <script>
+        function captureImage() {
+            fetch('/capture')
+                .then(response => response.text())
+                .then(filename => {
+                    document.getElementById("capturedImage").src = "/static/" + filename + "?t=" + new Date().getTime();
+                    document.getElementById("capturedImage").style.display = "block";
+                })
+                .catch(error => console.error("Error capturing image:", error));
+        }
+    </script>
+
+</body>
+
+</html>

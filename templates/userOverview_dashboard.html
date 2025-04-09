@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Navbar & Sidebar</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            scroll-behavior: smooth;
+        }
+        
+        .wrapper {
+            display: flex;
+            flex-grow: 1;
+            min-height: 100vh;
+            width: 100%;
+            position: fixed;
+        }
+        
+        .sidebar {
+            width: 250px;
+            transition: width 0.3s;
+            background-color: #343a40;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        .sidebar.collapsed {
+            width: 80px;
+        }
+        
+        .sidebar .nav-link {
+            display: flex;
+            align-items: center;
+        }
+        
+        .sidebar.collapsed .nav-link span {
+            display: none;
+        }
+        
+        .sidebar .nav-link i {
+            margin-right: 10px;
+        }
+        
+        .sidebar.collapsed .nav-link i {
+            margin-right: 0;
+        }
+        
+        .main-content {
+            flex-grow: 1;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 80px;
+            }
+            .sidebar .nav-link span {
+                display: none;
+            }
+        }
+        
+        #scroll-box {
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            border: 1px solid #ccc;
+            /* padding: 10px; */
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Wrapper for Sidebar and Content -->
+    <div class="wrapper" id="scroll-box">
+        <!-- Sidebar -->
+        <nav class="sidebar p-3">
+            <ul class="nav flex-column vh-20">
+                <li class="nav-item">
+                    <a href="{{ url_for('home_dash') }}" class="nav-link text-white"><i class="fa fa-home"></i><span>Home</span></a>
+                </li>
+                <!-- <li class="nav-item">
+                    <a href="{{ url_for('visitorOverview_dash') }}" class="nav-link text-white"><i class="fa fa-address-book"></i> <span>Visitor Overview</span></a>
+                </li> -->
+                <li class="nav-item">
+                    <a href="{{ url_for('userOverview_dash') }}" class="nav-link text-white"><i class="fa fa-user"></i> <span>User Overview</span></a>
+               </li>
+               <li class="nav-item">
+                <a href="{{ url_for('camera') }}" class="nav-link text-white"><i class="fa fa-camera"></i> <span>Camera</span></a>
+                </li>
+
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="main-content ">
+            <!-- Top Navbar -->
+            <nav class="navbar navbar-expand-lg navbar-dark bg-primary vh-20">
+                <div class="container-fluid">
+                    <a class="navbar-brand ms-3" href="#">Security Dashboard</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item">
+                                <button class="btn btn-warning">Refresh</button>
+                            </li>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <li class="nav-item">
+                                <a href="{{ url_for('logout') }}" class="btn btn-danger">Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+
+            <!-- Page Content -->
+            <div class="container mt-4 mx-0">
+
+
+                <table class="table" id="table">
+                    <h1 style="text-align: center;">visitor</h1>
+                    <thead>
+
+                        <tr>
+                            <th scope="col">S.N</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Mob.No</th>
+                            <th scope="col">Card</th>
+                            <th scope="col">UIP No</th>
+                            <th scope="col">Gender</th>
+                            <th scope="col">Purpose</th>
+                            <th scope="col">Approved</th>
+                            <th scope="col">Entry</th>
+                            <th scope="col">Exit</th>
+
+                        </tr>
+                    </thead>
+                </table>
+                <table class="table">
+                    <thead>
+                        <h2 style="text-align: center;">Rejected </h2>
+                        <tr>
+
+                            <th scope="col">Sr No</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Phone No</th>
+                            <th scope="col">UIP No</th>
+                            <th scope="col">Gender</th>
+                            <th scope="col">Entry</th>
+
+                        </tr>
+                    </thead>
+
+                </table>
+
+
+            </div>
+            <div class="table1"></div>
+        </div>
+    </div>
+
+    </div>
+
+    <script>
+        document.getElementById('toggleSidebar') ?.addEventListener('click', function() {
+            document.getElementById('sidebar').classList.toggle('collapsed');
+        });
+    </script>
+</body>
+
+</html>
