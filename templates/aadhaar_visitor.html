@@ -95,36 +95,32 @@
                         <thead class="table-dark">
                             <tr>
                                 <th>Name</th>
-                                <th>Father Name</th>
-
                                 <th>DOB</th>
                                 <th>UID No</th>
-                                <th>Sign</th>
+                                <th>Gender</th>
                                 <th>Purpose</th>
                                 <th>Status</th>
                                 <th>Action</th>
+                                
                             </tr>
                         </thead>
                         <tbody>
                             <!-- Sample data rows -->
-                            {% for pan_data in pan_data %}
-                           
-                            <tr>
-                                <td>{{pan_data.full_name}}</td>
-                                <td>{{pan_data.father_name}}</td>
-                                <td>{{pan_data.dob}}</td>
-                                <td>{{pan_data.pan_number}}</td>
-                                <td>{{pan_data.sign}}</td>
-                                <td>{{pan_data.purpose}}</td>
-                                <td>{{pan_data.isActive}}</td>
+                            {% for aadhaar_data in aadhaar_data %}
+                           <tr>
+                                <td>{{aadhaar_data.full_name}}</td>
+                                <td>{{aadhaar_data.dob}}</td>
+                                <td>{{aadhaar_data.aadhaar_number}}</td>
+                                <td>{{aadhaar_data.gender}}</td>
+                                <td>{{aadhaar_data.purpose}}</td>
+                                <td>{{aadhaar_data.isActive}}</td>
                                 <td>
-                                    <a href="{{ url_for('activate', id=pan_data._id) }}" class="btn btn-primary"><i class="fa fa-check"></i></a>
-                                    <a href="{{ url_for('in_activate', id=pan_data._id) }}" class="btn btn-danger"><i class="fa fa-close"></i></a>
+                                    <a href="{{ url_for('adhar_activate', id=aadhaar_data._id) }}" class="btn btn-primary"><i class="fa fa-check"></i></a>
+                                    <a href="{{ url_for('adhar_in_activate',id=aadhaar_data._id) }}" class="btn btn-danger"><i class="fa fa-close"></i></a>
                                     
                                 </td>                                
                             </tr>
                             {% endfor %} 
-                          
                                                                                
                         </tbody>
                     </table>

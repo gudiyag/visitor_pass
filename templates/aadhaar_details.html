@@ -111,15 +111,10 @@
                             <input type="text" class="form-control" id="floatingInput" placeholder="Name" style="margin: 2px" name="full_name" value="{{ aadhaar.full_name }}">
                         </div>
                     </div>
+                    
                     <div class="col-md-6">
                         <div class="form-group">
-                   <input type="text" class="form-control" id="floatingPassword" placeholder="Father Name" style="margin: 2px" name="father_name">
-                            
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="floatingPassword" placeholder=" DOB" style="margin: 2px;" name="dob" value="{{ aadhaar.dob }}">
+                            <input type="date" class="form-control" id="floatingPassword" placeholder=" DOB" style="margin: 2px;" name="dob" value="{{ aadhaar.dob }}">
 
                         </div>
                     </div>
@@ -129,11 +124,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="floatingPassword" placeholder="Card" style="margin: 2px" name="card">
-                        </div>
-                    </div>
+
                     <div class="col-md-6">
                         <div class="form-group">
                             <input type="text" class="form-control" id="floatingPassword" placeholder="UID" style="margin: 2px" name="aadhaar_number" value="{{ aadhaar.aadhaar_number }}">
@@ -143,7 +134,7 @@
 
                     <div class="col-md-6">
                         <div class="form-group">
-                            <input type="date" class="form-control" id="floatingPassword" placeholder="IssueDate" style="margin: 2px" name="issue_date">
+                            <input type="datetime-local" class="form-control" id="floatingPassword" placeholder="Issue Date" style="margin: 2px" name="issue_date">
 
                         </div>
                     </div>

@@ -220,6 +220,7 @@ def convert_image_to_text(image_path):
 
     # Use pytesseract to extract text from the imagesaxs
     extracted_text = pytesseract.image_to_string(gray_img)
+    print(f"after extract data {extracted_text}")
     return extracted_text
 
 
@@ -255,7 +256,7 @@ def parse_pan_details(text):
 
 @app.route("/extract_details", methods=["GET", "POST"])
 def extract_details():
-    img_path = "static/captured_images"
+    img_path = "static/captured_images/"
 
     if os.path.exists(img_path):
         image_files = [os.path.join(img_path, f) for f in os.listdir(img_path) if f.lower().endswith(('.jpg'))]
@@ -290,6 +291,7 @@ def aadhaar_details():
                 
             aadhaar_text = convert_image_to_text(latest_image)
             aadhaar_data = parse_aadhaar_details(aadhaar_text)
+            print(f"adhar data{aadhaar_data}")
         
     #----------------- saving extracted data into db ----------------------
     if request.method == "POST":
@@ -297,9 +299,7 @@ def aadhaar_details():
         full_name = request.form.get("full_name")
         dob = request.form.get("dob")
         gender = request.form.get("gender")
-        father_name = request.form.get("father_name")
-        card = request.form.get("card")
-        issue_date = request.form.get("issue_date")
+        # issue_date = request.form.get("issue_date")
         purpose = request.form.get("purpose")
 
         db.aadhaar_card_details.insert_one({
@@ -307,9 +307,7 @@ def aadhaar_details():
             "full_name":full_name, 
             "dob":dob, 
             "gender": gender,
-            "father_name": father_name,
-            "card": card,
-            "issue_date": issue_date,
+            # "issue_date": issue_date,
             "purpose": purpose,
         })
         return redirect(url_for("home_dash"))
@@ -336,9 +334,7 @@ def pan_details():
         full_name = request.form.get("full_name")
         father_name = request.form.get("father_name")
         dob = request.form.get("dob")
-        gender = request.form.get("gender")
-        card = request.form.get("Card")
-        issue_date = request.form.get("Issue_date")
+        sign = request.form.get("sign")
         purpose = request.form.get("Purpose")
 
         db.pan_card_details.insert_one({
@@ -346,9 +342,7 @@ def pan_details():
             "full_name": full_name,
             "father_name": father_name,
             "dob": dob,
-            "gender": gender,
-            "card": card,
-            "issue_date": issue_date,
+            "sign":sign,
             "purpose": purpose,
         })
         return redirect(url_for("home_dash"))
@@ -379,21 +373,28 @@ def userOverview_dash():
     return render_template("userOverview_dashboard.html",)
 
 
+# @app.route("/all_visitor")
+# @login_required
+# def all_visitor():
+#     data =list(db.pan_card_details.find()) or list(db.aadhaar_card_details.find())
+#     # data2 =list(db.aadhaar_card_details.find())
+
+
+#     return render_template("all_visitor.html", pan_data=data,aadhaar_data=data)
+
 @app.route("/all_visitor")
 @login_required
 def all_visitor():
-    data =list(db.pan_card_details.find())or list(db.aadhaar_card_details.find())
-    # data2 =list(db.aadhaar_card_details.find())
+    pan_data = list(db.pan_card_details.find())
+    return render_template("all_visitor.html", pan_data=pan_data)
 
-
-    return render_template("all_visitor.html", pan_data=data)
 
 
 @app.route("/accepted_visitor")
 @login_required
 def accepted_visitor():
-    data =list(db.pan_card_details.find({"isActive": "1"}))
-    return render_template("accepted_visitor.html", pan_data=data)
+    pan_data =list(db.pan_card_details.find({"isActive": "1"}))
+    return render_template("accepted_visitor.html", pan_data=pan_data)
 
 
 # activate record--------
@@ -419,8 +420,51 @@ def in_activate(id):
 @app.route("/rejected_visitor")
 @login_required
 def rejected_visitor():
-    data =list(db.pan_card_details.find({"isActive": "0"}))
-    return render_template("rejected_visitor.html",pan_data=data)
+    pan_data =list(db.pan_card_details.find({"isActive": "0"}))
+    return render_template("rejected_visitor.html",pan_data=pan_data)
+
+# -----------------------------------------------------
+
+@app.route("/aadhaar_visitor")
+@login_required
+def aadhaar_visitor():
+    aadhaar_data =list(db.aadhaar_card_details.find())
+    return render_template("aadhaar_visitor.html",aadhaar_data=aadhaar_data)
+
+
+@app.route("/aadhaar_accepted")
+@login_required
+def  aadhaar_accepted():
+    aadhaar_data =list(db.aadhaar_card_details.find({"isActive": "1"}))
+    return render_template("aadhaar_accepted.html",aadhaar_data=aadhaar_data)
+
+# activate record--------
+@app.route("/adhar_activate/<id>", methods=["GET"])
+def adhar_activate(id):
+    object_id = ObjectId(id)
+    print(f"id of:{object_id} and id :{id}")
+    result = db.aadhaar_card_details.update_one(
+        {"_id": object_id}, 
+        {"$set": {"isActive": "1"}} 
+    )
+    return redirect(url_for('aadhaar_visitor'))
+
+# in-activate record--------
+@app.route("/adhar-in-activate/<id>", methods=["GET"])
+def adhar_in_activate(id):
+    object_id = ObjectId(id)
+    result = db.aadhaar_card_details.update_one(
+        {"_id": object_id}, 
+        {"$set": {"isActive": "0"}} 
+    )
+    return redirect(url_for('aadhaar_visitor'))
+
+   
+@app.route("/aadhaar_rejected")
+@login_required
+def  aadhaar_rejected():
+    aadhaar_data =list(db.aadhaar_card_details.find({"isActive": "0"}))
+    return render_template("aadhaar_rejected.html",aadhaar_data=aadhaar_data)
 
 
 

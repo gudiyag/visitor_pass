@@ -21,34 +21,40 @@
     <!-- Wrapper for Sidebar and Content -->
     <div class="wrapper" id="scroll-box">
         <!-- Sidebar -->
-        <nav class="sidebar p-3">
+        <nav class="sidebar p-3" >
             <ul class="nav flex-column vh-20">
                 <li class="nav-item">
-                  <a href="{{ url_for('home_dash') }}" class="nav-link text-white"><i class="fa fa-home"></i><span> Home</span></a>
+                    <a href="{{ url_for('home_dash') }}" class="nav-link text-white"><i class="fa fa-home"></i><span>Home</span></a>
                 </li>
-                <!-- <li class="nav-item">
-                  <a href="/Overview" class="nav-link text-white"><i class="fa fa-address-book"></i> <span>Visitor Overview</span></a>
-                </li> -->
-              
-                <!-- ✅ Responsive Dropdown in Sidebar -->
                 <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle text-white" href="#" id="userDropdown" role="button"
-                     data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="fa fa-user"></i> <span>User Overview</span>
-                  </a>
-                  <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="userDropdown" style="position: static; float: none;">
-                    <li><a class="dropdown-item" href="{{ url_for('all_visitor') }}">All Visitor</a></li>
-                    <li><a class="dropdown-item" href="{{ url_for('accepted_visitor') }}">Accepted Visitor</a></li>
-                    <li><a class="dropdown-item" href="{{ url_for('rejected_visitor') }}">Rejected Visitors</a></li>
-                  </ul>
-                </li>
-              
+                    <a class="nav-link dropdown-toggle text-white" href="#" id="userDropdown" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                      <i class="fa fa-user"></i> <span>Pan Details</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="userDropdown" style="position: static; float: none;">
+                      <li><a class="dropdown-item" href="{{ url_for('all_visitor') }}">Pan Visitor</a></li>
+                      <li><a class="dropdown-item" href="{{ url_for('accepted_visitor') }}">Pan Accepted</a></li>
+                      <li><a class="dropdown-item" href="{{ url_for('rejected_visitor') }}"> Pan Rejected </a></li>
+                    </ul>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" href="#" id="userDropdown" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                      <i class="fa fa-user"></i> <span>Aadhar Details</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="userDropdown" style="position: static; float: none;">
+                      <li><a class="dropdown-item" href="{{ url_for('aadhaar_visitor') }}">Aadhaar Visitor</a></li>
+                      <li><a class="dropdown-item" href="{{ url_for('aadhaar_accepted') }}">Aadhaar Accepted </a></li>
+                      <li><a class="dropdown-item" href="{{ url_for('aadhaar_rejected') }}">Aadhaar Rejected</a></li>
+                    </ul>
+                  </li>
+                <!-- <li class="nav-item">
+                     <a href="{{ url_for('userOverview_dash') }}" class="nav-link text-white"><i class="fa fa-user"></i> <span>User Overview</span></a>
+                </li> -->
                 <li class="nav-item">
-                  <a href="{{ url_for('camera') }}" class="nav-link text-white"><i class="fa fa-camera"></i><span> Camera</span></a>
-                </li>
-              </ul>
-              
-              </ul>
+                    <a href="{{ url_for('camera') }}" class="nav-link text-white"><i class="fa fa-camera"></i> <span>Camera</span></a>
+               </li>
+            </ul>
         </nav>
 
         <!-- Main Content -->
@@ -88,32 +94,25 @@
                     <table id="example" class="table table-striped table-bordered nowrap" style="width:100%">
                         <thead class="table-dark">
                             <tr>
-                                <th>SNo</th>
+                               
                                 <th>Name</th>
-                                <th>Email</th>
-                                <th>Phone No</th>
+                                <th>father Name</th>
+                                <th>DOB</th>
                                 <th>UID No</th>
-                                <th>Gender</th>
+                                <th>Sign</th>
                                 <th>Purpose</th>
-                                <th>Entry</th>
-                                <th>Exit</th>
-                                
-                            </tr>
+                                </tr>
                         </thead>
                         <tbody>
                             <!-- Sample data rows -->
-                            {% for data in pan_data %}
+                            {% for pan_data in pan_data %}
                             <tr>
-                                <td>{{data.SNo}}</td>
-                                <td>{{data.full_name}}</td>
-                                <td>{{data.email}}</td>
-                                <td>{{data.phoneNo}}</td>
-                                <td>{{data.uId}}</td>
-                                <td>{{data.gender}}</td>
-                                <td>{{data.purpose}}</td>
-                                <td>{{data.entry}}</td>
-                                <td>{{data.exit}}</td>
-
+                                <td>{{pan_data.full_name}}</td>
+                                <td>{{pan_data.father_name}}</td>
+                                <td>{{pan_data.dob}}</td>
+                                <td>{{pan_data.pan_number}}</td>
+                                <td>{{pan_data.sign}}</td>
+                                <td>{{pan_data.purpose}}</td>
                             </tr>
                             {% endfor %}                           
                         </tbody>

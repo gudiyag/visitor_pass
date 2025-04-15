@@ -21,12 +21,23 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-white" href="#" id="userDropdown" role="button"
                        data-bs-toggle="dropdown" aria-expanded="false">
-                      <i class="fa fa-user"></i> <span>User Overview</span>
+                      <i class="fa fa-user"></i> <span>Pan Details</span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="userDropdown" style="position: static; float: none;">
-                      <li><a class="dropdown-item" href="{{ url_for('all_visitor') }}">All Visitor</a></li>
-                      <li><a class="dropdown-item" href="{{ url_for('accepted_visitor') }}">Accepted Visitor</a></li>
-                      <li><a class="dropdown-item" href="{{ url_for('rejected_visitor') }}">Rejected Visitors</a></li>
+                      <li><a class="dropdown-item" href="{{ url_for('all_visitor') }}">Pan Visitor</a></li>
+                      <li><a class="dropdown-item" href="{{ url_for('accepted_visitor') }}">Pan Accepted</a></li>
+                      <li><a class="dropdown-item" href="{{ url_for('rejected_visitor') }}"> Pan Rejected </a></li>
+                    </ul>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" href="#" id="userDropdown" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                      <i class="fa fa-user"></i> <span>Aadhar Details</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="userDropdown" style="position: static; float: none;">
+                      <li><a class="dropdown-item" href="{{ url_for('aadhaar_visitor') }}">Aadhaar Visitor</a></li>
+                      <li><a class="dropdown-item" href="{{ url_for('aadhaar_accepted') }}">Aadhaar Accepted </a></li>
+                      <li><a class="dropdown-item" href="{{ url_for('aadhaar_rejected') }}">Aadhaar Rejected</a></li>
                     </ul>
                   </li>
                 <!-- <li class="nav-item">
@@ -39,7 +50,7 @@
         </nav>
 
         <!-- Main Content -->
-        <div class="main-content " >
+        <div class="main-content">
             <!-- Top Navbar -->
             <nav class="navbar navbar-expand-lg navbar-dark bg-primary vh-20">
                 <div class="container-fluid">
